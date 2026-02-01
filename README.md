@@ -2,6 +2,8 @@
 
 A simple, lightweight Pomodoro timer for Waybar on Wayland/Hyprland systems.
 
+<img width="525" height="40" alt="image" src="https://github.com/user-attachments/assets/cb2fbd99-6302-4be6-9727-2b5b692fbf1e" />
+
 ## Features
 
 - 🍅 Classic 25-minute Pomodoro sessions
