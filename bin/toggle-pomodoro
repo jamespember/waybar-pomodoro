@@ -2,19 +2,14 @@
 # Toggle pomodoro timer on/off
 
 STATE_FILE="$HOME/.cache/pomodoro-state.txt"
+SCRIPT_PATH="$HOME/.local/bin/waybar-pomodoro"
 
 if [ -f "$STATE_FILE" ]; then
     # Timer running, stop it
-    rm "$STATE_FILE"
+    python3 -c "exec(open('$SCRIPT_PATH').read()); stop_timer()"
     notify-send "Pomodoro" "Timer stopped" -t 2000
 else
     # Timer idle, start it
-    python3 << 'EOF'
-import time
-import os
-state_file = os.path.expanduser("~/.cache/pomodoro-state.txt")
-with open(state_file, "w") as f:
-    f.write(str(time.time()))
-EOF
+    python3 -c "exec(open('$SCRIPT_PATH').read()); start_timer()"
     notify-send "Pomodoro" "Timer started - 25 minutes" -t 2000
 fi

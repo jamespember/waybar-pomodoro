@@ -42,20 +42,21 @@ def get_timer_state():
         start_time_from_state_file = float(file.read())
     return calc_time_remaining(start_time_from_state_file)
 
-def stop():
+def stop_timer():
     if os.path.exists(state_file):
         os.remove(state_file)
 
 
-if os.path.exists(state_file): # Timer is runnning 
-    print(get_timer_state())
-else:
-    # Time is idle
-    idle_output = {
-        "text": "Idle",
-        "class": "idle",
-        "tooltip": "No timer running"
-    }
-    print(json.dumps(idle_output))
+if __name__ == "__main__":
+    if os.path.exists(state_file): # Timer is running 
+        print(get_timer_state())
+    else:
+        # Timer is idle
+        idle_output = {
+            "text": "Idle",
+            "class": "idle",
+            "tooltip": "No timer running"
+        }
+        print(json.dumps(idle_output))
 
 
