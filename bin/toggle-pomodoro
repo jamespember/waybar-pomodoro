@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Toggle pomodoro timer on/off
+
+STATE_FILE="$HOME/.cache/pomodoro-state.txt"
+
+if [ -f "$STATE_FILE" ]; then
+    # Timer running, stop it
+    rm "$STATE_FILE"
+    notify-send "Pomodoro" "Timer stopped" -t 2000
+else
+    # Timer idle, start it
+    python3 << 'EOF'
+import time
+import os
+state_file = os.path.expanduser("~/.cache/pomodoro-state.txt")
+with open(state_file, "w") as f:
+    f.write(str(time.time()))
+EOF
+    notify-send "Pomodoro" "Timer started - 25 minutes" -t 2000
+fi
